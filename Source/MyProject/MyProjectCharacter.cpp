@@ -235,6 +235,9 @@ void AMyProjectCharacter::OnFindSessionComplete(bool bWasSuccessful)
 
 void AMyProjectCharacter::OnJoinSessionComplete(FName SessionName, EOnJoinSessionCompleteResult::Type Result)
 {
+	if (GEngine)
+		GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Green, FString::Printf(TEXT("OnJoinSessionComplete Started")));
+
 	if (!OnlineSessionInterface.IsValid())
 		return;
 
@@ -247,6 +250,11 @@ void AMyProjectCharacter::OnJoinSessionComplete(FName SessionName, EOnJoinSessio
 		APlayerController* PlayerController = GetGameInstance()->GetFirstLocalPlayerController();
 		if (PlayerController)
 			PlayerController->ClientTravel(Address, ETravelType::TRAVEL_Absolute);
+	}
+	else
+	{
+		if (GEngine)
+			GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, FString::Printf(TEXT("GetResolvedConnectString Failed..")));
 	}
 }
 
