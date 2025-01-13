@@ -25,7 +25,7 @@ DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 AMyProjectCharacter::AMyProjectCharacter() : 
 	CreateSessionCompleteDelegate(FOnCreateSessionCompleteDelegate::CreateUObject(this, &ThisClass::OnCreateSessionComplete))
 	, FindSessionCompleteDelegate(FOnFindSessionsCompleteDelegate::CreateUObject(this, &ThisClass::OnFindSessionComplete))
-	, JoinSessionCompleteDelegate(FOnJoinSessionCompleteDelegate::CreateUObject(this, &ThisClass::OnJoinSessionComplate))
+	, JoinSessionCompleteDelegate(FOnJoinSessionCompleteDelegate::CreateUObject(this, &ThisClass::OnJoinSessionComplete))
 {
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
@@ -233,7 +233,7 @@ void AMyProjectCharacter::OnFindSessionComplete(bool bWasSuccessful)
 	}
 }
 
-void AMyProjectCharacter::OnJoinSessionComplate(FName SessionName, EOnJoinSessionCompleteResult::Type Result)
+void AMyProjectCharacter::OnJoinSessionComplete(FName SessionName, EOnJoinSessionCompleteResult::Type Result)
 {
 	if (!OnlineSessionInterface.IsValid())
 		return;
